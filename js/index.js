@@ -81,14 +81,19 @@ let isOpen=false;
             document.getElementById("loader").style.display="none";
         });
         
-        async function handleSubmitPatient(name,age){
-            let name=document.getElementById("input-name").value;
+        async function handleSubmitPatient(){
+            let name=document.getElementById("input-patientsname").value;
             let age=document.getElementById("input-age").value;
 
             if(name.trim()!=""&age.trim()!=""){
-                await contractInstance.methods.registerPatient()
+                document.getElementById("loader").style.display="block";
+                await contractInstance.methods.registerPatient(name,age);
+                addPatientToDom(name,age);
+                document.getElementById("loader").style.display="none";
             }
         }
+
+        document.getElementById("submit-patient").addEventListener("click",handleSubmitPatient);
         function addPatientToDom(name,age,sex,dateofadmission,patientId,healthcondition,address,phonenumber,nextofkin,nextofkinsphonenumber){
             let allPatients=document.getElementById("patient-list-section");
 
