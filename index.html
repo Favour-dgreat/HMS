@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale-1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie-edge">
+        <title>HMS Aepp</title>
+        
+        <link href="./CSS/style.css" rel="stylesheet" />
+    
+    </head>
+    <body>
+        <div class="all-body">
+
+        <div id="loader" class="loader"></div>
+    
+        <div class="header">
+            <p>HMS aepp</p>
+
+            <div id="nav-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div id="header-options" class="close-nav">
+        <p id="addPatient"><a href="#add-patients-section">Add Patient</a></p>
+        <p id="viewPatients"><a href="#patient-list-section">Patient List </a></p>
+    </div>
+
+
+    <div id="add-patients-section">
+    <div id="patients-personal-info">
+        <h3>Patients Personal Info:</h3>
+        <input id="input-patientsname" placeholder="Name"/>
+        <input id="input-age" placeholder="Age"/>
+        <input id="input-sex" placeholder="Sex"/>
+        <input id="input-dateofadmission" placeholder="Date of Admission"/>
+        <input id="input-patientsId" placeholder="Card Number/Patients Id"/>
+        <input id="input-patientHealthCondition" placeholder="Health Condition"/>
+        <input id="input-patientaddress" placeholder="Home Address"/>
+        <input id="input-patientphonenumber" placeholder="Phone Number"/>
+        <input id="input-patientnextofkin" placeholder="Next of Kin"/>
+        <input id="input-nextofkinsphonenumber" placeholder="Next of Kin's Phone Number"/>
+    </div>
+    <div id="add-patients-medical-info">
+        <h3>Patients Medical Info:</h3>
+        <input id="input-patientsheight" placeholder="Height"/>
+        <input id="input-patientsweight" placeholder="Weight"/>
+        <input id="input-patientsbmi" placeholder="BMI"/>
+        <input id="input-patientsgenotype" placeholder="Genotype"/>
+        <input id="input-patientsbloodgroup" placeholder="Blood Group"/>
+        <input id="input-patientsmedicalhistory" placeholder="Patients Medical History"/>
+        <input id="input-medicationgiven" placeholder="Medication Given"/>
+    <button id="submit-patient">Submit</button>
+</div>
+</div>
+    <div id="patient-list-section"></div>
+    <script src="https://unpkg.com/@aeternity/aepp-sdk@6.1.2/dist/aepp-sdk.browser-script.js"></script>
+    <script src="js/index.js"></script>
+ </body>
+</html>
+
