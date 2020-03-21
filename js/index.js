@@ -116,7 +116,7 @@ let isOpen=false;
                     console.log(res);
                     axios.get(`https://ipfs.io/ipfs/${res}`).then(async function(result){
 //  nameOfPatient':string,age':string,sex':string,dateOfAdmission':string,patientID':string,patientHealthCondition':string,patientHomeAddress':string,patientsPhoneNumber':string,nextofkin':string,nextofkinPhoneNumber':string,ipfsHash':string
-     await contractInstance.methods.registerPatient(name,age,sex,dateOfAdmission,patientId,patientHealthCondition,patientAddress,patientPhoneNumber,patientNextOfkin,nextOfKinsPhonenumber,res);
+     await contractInstance.methods.registerpatientsPersonalInfo(name,age,sex,dateOfAdmission,patientId,patientHealthCondition,patientAddress,patientPhoneNumber,patientNextOfkin,nextOfKinsPhonenumber,res);
                         document.getElementById("loader").style.display="none";
                         addPatientToDom(name,age,result.data);
                     }).catch(function(error){
