@@ -98,7 +98,7 @@ let isOpen=false;
 
             if(name.trim()!=""&age.trim()!=""&&patientImage!=null){
                 document.getElementById("loader").style.display="block";
-                let reader=newFileReader();
+                let reader=new FileReader();
                 reader.onloadend=async function (){
                 ipfs.add(reader.result, async function(err,res){
                     if(err){
