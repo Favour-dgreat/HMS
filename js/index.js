@@ -78,7 +78,7 @@ let isOpen=false;
             client=await Ae.Aepp();
             contractInstance=await client.getContractInstance(contractSource,{contractAddress});
             let allPatients=(await contractInstance.methods.getrecordManagerListofPatients()).decodedResult;
-            let allPatientsMedicalInfo=(await contractInstance.methods.getpatientsMedicalrecordListofPatients()).decodedResult;
+           // let allPatientsMedicalInfo=(await contractInstance.methods.getpatientsMedicalrecordListofPatients()).decodedResult;
             document.getElementById("loader").style.display="none";
             console.log(allPatients,"all patients");
             allPatients=map(patients=>{
@@ -95,7 +95,15 @@ let isOpen=false;
         async function handleSubmitPatient(){
             let name=document.getElementById("input-patientsname").value;
             let age=document.getElementById("input-age").value;
-
+            let sex=document.getElementById("input-sex").value;
+            let dateOfAdmission=document.getElementById("input-dateofadmission").value;
+            let patientId=document.getElementById("input-patientsId").value;
+            let patientHealthCondition=document.getElementById("input-patientHealthCondition").value;
+            let patientAddress=document.getElementById("input-patientaddress").value;
+            let patientPhoneNumber=document.getElementById("input-patientphonenumber").value;
+            let patientNextOfkin=document.getElementById("input-patientnextofkin").value;
+            let nextOfKinsPhonenumber=document.getElementById("input-nextofkinsphonenumber").value;
+            
             if(name.trim()!=""&age.trim()!=""&&patientImage!=null){
                 document.getElementById("loader").style.display="block";
                 let reader=new FileReader();
@@ -107,7 +115,8 @@ let isOpen=false;
                     }
                     console.log(res);
                     axios.get(`https://ipfs.io/ipfs/${res}`).then(async function(result){
-                        await contractInstance.methods.registerPatient(name,age,res);
+//  nameOfPatient':string,age':string,sex':string,dateOfAdmission':string,patientID':string,patientHealthCondition':string,patientHomeAddress':string,patientsPhoneNumber':string,nextofkin':string,nextofkinPhoneNumber':string,ipfsHash':string
+     await contractInstance.methods.registerPatient(name,age,sex,dateOfAdmission,patientId,patientHealthCondition,patientAddress,patientPhoneNumber,patientNextOfkin,nextOfKinsPhonenumber,res);
                         document.getElementById("loader").style.display="none";
                         addPatientToDom(name,age,result.data);
                     }).catch(function(error){
