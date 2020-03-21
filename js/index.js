@@ -141,7 +141,7 @@ let isOpen=false;
             let patientsTextDiv=document.createElement("div");
             
             let patientsImage=document.createElement("img");
-            patientsImage.src="imageData";
+            patientsImage.src=imageData;
             let patientList = document.createElement('p');
             patientList.innerText="List Of Patients";
 
