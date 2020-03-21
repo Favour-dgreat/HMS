@@ -184,7 +184,7 @@ let isOpen=false;
             patientsTextDiv.appendChild(patientsDateOfAdmissionParagraph);
             patientsTextDiv.appendChild(patientsIDParagraph);
             patientsTextDiv.appendChild(patientsHealthConditionParagraph);
-            patientsTextDivv.appendChild(patientsAddressParagraph);
+            patientsTextDiv.appendChild(patientsAddressParagraph);
             patientsTextDiv.appendChild(patientsPhoneNumberParagraph);
             patientsTextDiv.appendChild(patientsNextOfKinParagraph);
             patientsTextDiv.appendChild(patientsNextOfKinsPhoneNumberParagraph);
