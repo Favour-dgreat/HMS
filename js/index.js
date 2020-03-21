@@ -1,3 +1,4 @@
+
 let isOpen=false;
         function toggleNavBar(){
             console.log("clicked"); 
@@ -68,35 +69,74 @@ let isOpen=false;
                 state.patientsMedicalrecord[Call.caller]
 
     `;
+    let patientImage="null";
+    let ipfs="null";
+    document.getElementById("input-image").addEventListener("change",function(event){
+        patientImage=event.currentTarget.files[0];
+        console.log(patientImage);
+    })
         
         window.addEventListener('load',async function(){
+            ipfs=await new IPFS({host:'ipfs.infura.io',port:5001,protocol:'https'});
+            console.log(ipfs);
             client=await Ae.Aepp();
-            contractInstance=await client.getContractInstamce(contractSource,{contractAddress});
+            contractInstance=await client.getContractInstance(contractSource,{contractAddress});
             let allPatients=(await contractInstance.methods.getrecordManagerListofPatients()).decodedResult;
             let allPatientsMedicalInfo=(await contractInstance.methods.getpatientsMedicalrecordListofPatients()).decodedResult;
+            document.getElementById("loader").style.display="none";
             console.log(allPatients,"all patients");
             allPatients=map(patients=>{
-                addPatientToDom(patient.name,patient.age);
+                axios.get(`https://ipfs.io/ipfs/${book.ipfsHash}`).then(function(result){
+                    addPatientToDom(patient.name,patient.age,result.data);
+                }).catch(function(error){
+                    console.error(error)
+                })
+                
             });
-            document.getElementById("loader").style.display="none";
+            
         });
         
         async function handleSubmitPatient(){
             let name=document.getElementById("input-patientsname").value;
             let age=document.getElementById("input-age").value;
 
-            if(name.trim()!=""&age.trim()!=""){
+            if(name.trim()!=""&age.trim()!=""&&patientImage!=null){
                 document.getElementById("loader").style.display="block";
-                await contractInstance.methods.registerPatient(name,age);
-                addPatientToDom(name,age);
-                document.getElementById("loader").style.display="none";
+                let reader=newFileReader();
+                reader.onloadend=async function (){
+                ipfs.add(reader.result, async function(err,res){
+                    if(err){
+                        console.error(err);
+                        return;
+                    }
+                    console.log(res);
+                    axios.get(`https://ipfs.io/ipfs/${res}`).then(async function(result){
+                        await contractInstance.methods.registerPatient(name,age,res);
+                        document.getElementById("loader").style.display="none";
+                        addPatientToDom(name,age,result.data);
+                    }).catch(function(error){
+                        document.getElementById("loader").style.display="none";
+                        console.error(error);
+                    })
+                    
+                })
+                console.log(reader.result);
+                } 
+                
+                reader.readAsDataURL(patientImage);
+                
             }
+            
         }
 
         document.getElementById("submit-patient").addEventListener("click",handleSubmitPatient);
-        function addPatientToDom(name,age,sex,dateofadmission,patientId,healthcondition,address,phonenumber,nextofkin,nextofkinsphonenumber){
+        function addPatientToDom(name,age,sex,dateofadmission,patientId,healthcondition,address,phonenumber,nextofkin,nextofkinsphonenumber,imageData){
             let allPatients=document.getElementById("patient-list-section");
 
+            let patientsTextDiv=document.createElement("div");
+            
+            let patientsImage=document.createElement("img");
+            patientsImage.src="imageData";
             let patientList = document.createElement('p');
             patientList.innerText="List Of Patients";
 
@@ -133,19 +173,19 @@ let isOpen=false;
             let patientsNextOfKinsPhoneNumberParagraph=document.createElement("p");
             patientsNextOfKinsPhoneNumberParagraph.innerText=nextofkinsphonenumber;
 
-            newPatientDiv.appendChild(patientsNameParagraph);
-            newPatientDiv.appendChild(patientsAgeParagraph);
-            newPatientDiv.appendChild(patientsSexParagraph);
-            newPatientDiv.appendChild(patientsDateOfAdmissionParagraph);
-            newPatientDiv.appendChild(patientsIDParagraph);
-            newPatientDiv.appendChild(patientsHealthConditionParagraph);
-            newPatientDiv.appendChild(patientsAddressParagraph);
-            newPatientDiv.appendChild(patientsPhoneNumberParagraph);
-            newPatientDiv.appendChild(patientsNextOfKinParagraph);
-            newPatientDiv.appendChild(patientsNextOfKinsPhoneNumberParagraph);
+            patientsTextDiv.appendChild(patientsNameParagraph);
+            patientsTextDiv.appendChild(patientsAgeParagraph);
+            patientsTextDiv.appendChild(patientsSexParagraph);
+            patientsTextDiv.appendChild(patientsDateOfAdmissionParagraph);
+            patientsTextDiv.appendChild(patientsIDParagraph);
+            patientsTextDiv.appendChild(patientsHealthConditionParagraph);
+            patientsTextDivv.appendChild(patientsAddressParagraph);
+            patientsTextDiv.appendChild(patientsPhoneNumberParagraph);
+            patientsTextDiv.appendChild(patientsNextOfKinParagraph);
+            patientsTextDiv.appendChild(patientsNextOfKinsPhoneNumberParagraph);
 
-            allPatients.appendChild(patientList);
-            allPatients.appendChild(newPatientDiv);
+            allPatients.appendChild(patientsImage);
+            allPatients.appendChild(patientsTextDiv);
         }
 
         
