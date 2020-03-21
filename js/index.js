@@ -145,7 +145,7 @@ let isOpen=false;
             let patientList = document.createElement('p');
             patientList.innerText="List Of Patients";
 
-            let newPatientDiv=document.getElementById("div");
+            let newPatientDiv=document.createElement("div");
             newPatientDiv.classList.add("patient");
 
             let patientsNameParagraph=document.createElement("p");
