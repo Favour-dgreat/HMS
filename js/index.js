@@ -82,7 +82,7 @@ let isOpen=false;
             document.getElementById("loader").style.display="none";
             console.log(allPatients,"all patients");
             allPatients=map(patients=>{
-                axios.get(`https://ipfs.io/ipfs/${book.ipfsHash}`).then(function(result){
+                axios.get(`https://ipfs.io/ipfs/${patients.ipfsHash}`).then(function(result){
                     addPatientToDom(patient.name,patient.age,result.data);
                 }).catch(function(error){
                     console.error(error)
