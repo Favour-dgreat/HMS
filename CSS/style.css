@@ -20,8 +20,6 @@ body{
     align-items: center;
     border:solid 2px #C70039;
 }
-
-
 .header p{
     margin-left: 10%;
     color:white;
@@ -32,7 +30,6 @@ body{
     margin-right: 10px;
     cursor: pointer;
 }
-
 #nav-toggle div{
     width: 30px;
     border: 1px solid white;
@@ -78,17 +75,44 @@ body{
     }
 }
 
-#add-patients-section{
-    width: 90%;
-    text-align: center;
-    margin: 70px auto 0;
-  
-    height: 210% !important;
+#search-patients-section{
+  width: 90%;
+  text-align: center;
+  margin: 70px auto 0;
 }
 
-#add-patients-section input{
-    padding-left: 20px;
-    width: 35%;
+#search-patients-section input{
+  padding-left: 20px;
+  width: 80%;
+  margin: 0 auto;
+  border: 2px solid #ccc;
+  font-weight: bold;
+  color: #ccc;
+  height: 40px;
+  border-radius: 10px; 
+  display: block;
+  margin-bottom: 10px; 
+}
+
+#search-patients-section button{
+  width: 80px;
+  color: white;
+  height: 40px;
+  background-color: #C70039;
+  border: 2px solid #C70039;
+  font-weight: bold;
+  border-radius: 10px;
+}
+#add-doctor-section{
+    margin-top: 20px;
+    width: 90%;
+    text-align:center;
+    margin: 70px auto 0;
+}
+
+#add-doctor-section input{
+  padding-left: 20px;
+  width: 80%;
     margin: 0 auto;
     border: 2px solid #ccc;
     font-weight: bold;
@@ -99,7 +123,57 @@ body{
     margin-bottom: 10px;
 }
 
-#add-patients-section button{
+#add-patients-medical-info{
+    width: 90%;
+    text-align: center;
+    margin: 50px auto 0;
+}
+
+#add-patients-medical-info input{
+  padding-left: 20px;
+  width: 80%;
+  margin: 0 auto;
+  border: 2px solid #ccc;
+  font-weight: bold;
+  color: #ccc;
+  height: 40px;
+  border-radius: 10px; 
+  display: block;
+  margin-bottom: 10px;
+}
+
+#add-patients-section{
+    width: 90%;
+    text-align: center;
+    margin: 50px auto 0;
+}
+
+#add-patients-section input{
+    padding-left: 20px;
+    width: 80%;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    font-weight: bold;
+    color: #ccc;
+    height: 40px;
+    border-radius: 10px; 
+    display: block;
+    margin-bottom: 10px;
+}
+
+#add-doctor-section ::placeholder{
+  text-align: center;
+}
+
+#add-patients-section ::placeholder{
+  text-align:center;
+}
+
+#add-patients-medical-info ::placeholder{
+  text-align: center;
+}
+
+#add-patients-medical-info button{
     width: 80px;
     color: white;
     height: 40px;
